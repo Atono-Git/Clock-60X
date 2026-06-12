@@ -1,0 +1,127 @@
+body {
+
+```
+margin: 0;
+
+height: 100vh;
+
+display: flex;
+
+justify-content: center;
+
+align-items: center;
+
+background: #111;
+
+color: white;
+
+font-family: Arial, sans-serif;
+
+overflow: hidden;
+```
+
+}
+
+#clock {
+
+```
+font-size: 8rem;
+
+font-weight: bold;
+
+letter-spacing: 0.1em;
+```
+
+}
+
+#settingsPanel {
+
+```
+position: fixed;
+
+top: 0;
+
+right: -300px;
+
+width: 300px;
+
+height: 100%;
+
+background: #222;
+
+padding: 20px;
+
+box-sizing: border-box;
+
+transition: right 0.3s;
+```
+
+}
+
+#settingsPanel.open {
+
+```
+right: 0;
+```
+
+}
+
+#settingsButton {
+
+```
+position: absolute;
+
+left: -60px;
+
+top: 20px;
+
+width: 60px;
+
+height: 60px;
+
+border: none;
+
+border-radius: 50%;
+
+font-size: 28px;
+
+cursor: pointer;
+```
+
+}
+
+#settingsPanel h2 {
+
+```
+margin-top: 0;
+```
+
+}
+
+#settingsPanel label {
+
+```
+display: block;
+
+margin-top: 20px;
+```
+
+}
+
+#settingsPanel input,
+
+#settingsPanel select,
+
+#settingsPanel button:not(#settingsButton) {
+
+```
+width: 100%;
+
+margin-top: 10px;
+
+padding: 10px;
+
+box-sizing: border-box;
+```
+
+}
