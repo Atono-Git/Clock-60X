@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>ダイヤ時計</title>
+
+<link rel="stylesheet"
+      href="clock.css">
+```
+
+</head>
+
+<body>
+
+```
+<div id="clock">
+    04:00:00
+</div>
+
+<div id="settingsPanel">
+
+    <button id="settingsButton">
+        ⚙️
+    </button>
+
+    <h2>設定</h2>
+
+    <label for="startTime">
+        開始時刻
+    </label>
+
+    <input
+        type="time"
+        id="startTime"
+        value="04:00"
+    >
+
+    <label for="speed">
+        倍率
+    </label>
+
+    <select id="speed">
+
+        <option value="1">1倍</option>
+
+        <option value="10">
+            10倍
+        </option>
+
+        <option value="20">
+            20倍
+        </option>
+
+        <option value="30">
+            30倍
+        </option>
+
+        <option value="40">
+            40倍
+        </option>
+
+        <option value="50">
+            50倍
+        </option>
+
+        <option value="60" selected>
+            60倍
+        </option>
+
+    </select>
+
+    <button id="startButton">
+        開始
+    </button>
+
+    <button id="pauseButton">
+        停止
+    </button>
+
+    <button id="resetButton">
+        リセット
+    </button>
+
+</div>
+
+<script src="clock.js"></script>
+```
+
+</body>
+
+</html>
