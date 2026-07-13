@@ -1,129 +1,132 @@
 const settingsButton =
-document.getElementById(
-"settingsButton"
-);
+    document.getElementById("settingsButton");
 
 const settingsPanel =
-document.getElementById(
-"settingsPanel"
-);
+    document.getElementById("settingsPanel");
 
-settingsButton.onclick =
-function () {
+const startButton =
+    document.getElementById("startButton");
 
-```
-settingsPanel.classList.toggle(
-    "open"
-);
-```
+const resetButton =
+    document.getElementById("resetButton");
 
-};
+const startTimeInput =
+    document.getElementById("startTime");
 
-let virtualSeconds =
-4 * 3600;
+const speedSelect =
+    document.getElementById("speed");
+
+const clock =
+    document.getElementById("clock");
 
 let running = false;
 
+let virtualSeconds = 4 * 3600;
+
+
+
+// 設定パネル開閉
+settingsButton.onclick = function () {
+
+    settingsPanel.classList.toggle("open");
+
+};
+
+
+
+// 時計表示更新
 function updateDisplay() {
 
-```
-const h =
-    Math.floor(
-        virtualSeconds / 3600
-    ) % 24;
+    const hours =
+        Math.floor(virtualSeconds / 3600) % 24;
 
-const m =
-    Math.floor(
-        virtualSeconds / 60
-    ) % 60;
+    const minutes =
+        Math.floor(virtualSeconds / 60) % 60;
 
-const s =
-    virtualSeconds % 60;
+    const seconds =
+        virtualSeconds % 60;
 
-document.getElementById(
-    "clock"
-).textContent =
+    clock.textContent =
 
-    String(h).padStart(2, "0")
-    + ":"
-    + String(m).padStart(2, "0")
-    + ":"
-    + String(s).padStart(2, "0");
-```
+        String(hours).padStart(2, "0")
+        + ":"
+        + String(minutes).padStart(2, "0")
+        + ":"
+        + String(seconds).padStart(2, "0");
 
 }
 
-document.getElementById(
-"startButton"
-).onclick =
-function () {
 
-```
-running = true;
-```
 
-};
+// 開始・停止切り替え
+startButton.onclick = function () {
 
-document.getElementById(
-"pauseButton"
-).onclick =
-function () {
+    running = !running;
 
-```
-running = false;
-```
+    if (running) {
 
-};
+        startButton.textContent = "停止";
 
-document.getElementById(
-"resetButton"
-).onclick =
-function () {
+        startButton.classList.add("active-start");
 
-```
-const time =
-    document.getElementById(
-        "startTime"
-    ).value;
+    }
 
-const [h, m] =
-    time.split(":")
-    .map(Number);
+    else {
 
-virtualSeconds =
-    h * 3600 +
-    m * 60;
+        startButton.textContent = "開始";
 
-updateDisplay();
-```
+        startButton.classList.remove("active-start");
+
+    }
 
 };
 
-setInterval(
-function () {
 
-```
+
+// リセット
+resetButton.onclick = function () {
+
+    const time =
+        startTimeInput.value;
+
+    const parts =
+        time.split(":");
+
+    const hours =
+        Number(parts[0]);
+
+    const minutes =
+        Number(parts[1]);
+
+    virtualSeconds =
+        hours * 3600 +
+        minutes * 60;
+
+    updateDisplay();
+
+};
+
+
+
+// 時計更新
+setInterval(function () {
+
     if (!running) {
 
         return;
 
     }
 
-    const speed =
-        Number(
-            document.getElementById(
-                "speed"
-            ).value
-        );
-
-    virtualSeconds += speed;
+    virtualSeconds +=
+        Number(speedSelect.value);
 
     updateDisplay();
 
-},
-1000
-```
+}, 1000);
 
-);
 
+
+// 初期表示
 updateDisplay();
+
+startButton.textContent = "開始";
