@@ -23,6 +23,11 @@ let running = false;
 
 let virtualSeconds = 4 * 3600;
 
+let lastHour =
+    Math.floor(
+        virtualSeconds / 3600
+    );
+
 
 
 // 設定パネル開閉
@@ -117,10 +122,37 @@ setInterval(function () {
 
     }
 
-    virtualSeconds +=
-        Number(speedSelect.value);
+   virtualSeconds +=
+    Number(speedSelect.value);
 
-    updateDisplay();
+const currentHour =
+    Math.floor(
+        virtualSeconds / 3600
+    ) % 24;
+
+if (currentHour !== lastHour) {
+
+    const speech =
+        new SpeechSynthesisUtterance(
+            currentHour + "時です"
+        );
+
+    speech.lang = "ja-JP";
+
+    speechSynthesis.speak(
+        speech
+    );
+
+    lastHour = currentHour;
+
+}
+
+updateDisplay();
+
+ lastHour =
+    Math.floor(
+        virtualSeconds / 3600
+    );
 
 }, 1000);
 
