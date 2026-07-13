@@ -1,3 +1,5 @@
+import { db } from "./firebase.js";
+
 const settingsButton =
     document.getElementById("settingsButton");
 
@@ -13,20 +15,30 @@ const resetButton =
 const startTimeInput =
     document.getElementById("startTime");
 
-const speedSelect =
+export const speedSelect =
     document.getElementById("speed");
 
 const clock =
     document.getElementById("clock");
 
-let running = false;
+export let running = false;
 
-let virtualSeconds = 4 * 3600;
+export let virtualSeconds = 4 * 3600;
+
+export let isClient = false;
+
+export function setClientMode(value) {
+
+    isClient = value;
+
+}
 
 let lastHour =
     Math.floor(
         virtualSeconds / 3600
     );
+
+    let lastSync = 0;
 
 
 
@@ -110,18 +122,36 @@ resetButton.onclick = function () {
     updateDisplay();
 
 };
+export function setVirtualSeconds(value) {
 
+    virtualSeconds = value;
+
+    lastSync = Date.now();
+
+    updateDisplay();
+
+}
+
+export function setRunning(value) {
+
+    running = value;
+
+}
 
 
 // 時計更新
 setInterval(function () {
 
+    if (isClient) {
+
+        return;
+
+    }
     if (!running) {
 
         return;
 
     }
-
    virtualSeconds +=
     Number(speedSelect.value);
 
@@ -149,6 +179,32 @@ if (currentHour !== lastHour) {
 
 updateDisplay();
 
+const now = Date.now();
+
+document.dispatchEvent(
+    new CustomEvent(
+        "clockTick",
+        {
+            detail: {
+
+                running,
+
+                virtualSeconds,
+
+                speed:
+                    Number(speedSelect.value),
+
+                timestamp:
+                    now
+
+            }
+
+        }
+
+    )
+
+);
+
 
 
 }, 1000);
@@ -162,3 +218,7 @@ updateDisplay();
         virtualSeconds / 3600
     );
 startButton.textContent = "開始";
+
+export {
+    updateDisplay
+};
