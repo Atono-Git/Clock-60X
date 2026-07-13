@@ -28,6 +28,40 @@
         </button>
 
         <h2>設定</h2>
+        <hr>
+
+<h3>オンライン</h3>
+
+<button id="hostButton">
+    親機として開始
+</button>
+
+<label for="roomCode">
+    部屋番号
+</label>
+
+<input
+    type="text"
+    id="roomCode"
+    placeholder="00000"
+    maxlength="5"
+>
+
+<label for="roomPassword">
+    パスワード
+</label>
+
+<input
+    type="password"
+    id="roomPassword"
+    placeholder="パスワード"
+>
+
+<button id="joinButton">
+    参加
+</button>
+
+<hr>
 
         <label for="startTime">
             開始時刻
@@ -65,7 +99,7 @@
 
     </div>
 
-    <script src="clock.js"></script>
+    <script type="module" src="main.js"></script>
 
 </body>
 
