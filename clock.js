@@ -149,10 +149,7 @@ if (currentHour !== lastHour) {
 
 updateDisplay();
 
- lastHour =
-    Math.floor(
-        virtualSeconds / 3600
-    );
+
 
 }, 1000);
 
@@ -160,5 +157,8 @@ updateDisplay();
 
 // 初期表示
 updateDisplay();
-
+ lastHour =
+    Math.floor(
+        virtualSeconds / 3600
+    );
 startButton.textContent = "開始";
